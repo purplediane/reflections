@@ -7,4 +7,8 @@
 3. How can you use the staging area to make sure you have one commit per logical change?
 	You only add files to the staging area that belong in the next commit. Other files can stay in the working directory for staging/commit later.
 
+4. What are some situations when branches would be helpful in keeping your history organized? How would branches help?
+	When you have changes that you are not sure if you will commmit later, or when you don't want to interfere with making changes to the master branch. You can still make bug-fixes or other changes to the master version before the branch is ready to commit.
 
+5. How do the diagrams help you visualize the branch structure?
+	They show how it is possible to make new branches. How you can make changes to an old commit to see if it works, and make a new branch to keep it, or go back to a branch to discard it.
