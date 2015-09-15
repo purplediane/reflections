@@ -12,3 +12,10 @@
 
 5. How do the diagrams help you visualize the branch structure?
 	They show how it is possible to make new branches. How you can make changes to an old commit to see if it works, and make a new branch to keep it, or go back to a branch to discard it.
+
+6. What is the result of merging two branches together? Why do we represent it in the diagram the way we do?
+	All changes for both branches are merged together, so the two branches come together into one new commit.
+
+7. What are the pros and cons of Git’s automatic merging vs. always doing merges manually?
+	When the things that are merged do not relate to each other, the automatic merging saves lots of time. If the merges are related but in different parts of the code, it is possible for the automatic merge to break things. One could argue that the project management was poor, if two people are making related changes and don't know about each other. Manual merges still have lots of room for human error when one person does the manual merging, if that person doesn't fully understand the other persons changes.
+	
