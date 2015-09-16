@@ -23,5 +23,4 @@ and what would be harder?
 
 6. When would you want to make changes in a separate branch rather than directly in
 master?  What benefits does each approach have?
-
-    Fill in your answer here
+	With using separate branches and pull requests, there is less likelihood that a change is going to break everything. Other people can look at the pull requests and comment on them. In the case of code, you want people to review changes before they are merged into master production code.
