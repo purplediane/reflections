@@ -15,13 +15,11 @@ use one instead of another?
 
 4. What is the benefit of having a copy of the last known state of the remote
 stored locally?
-
-    Fill in your answer here
+	You can work offline, without internet access or at least without access to the remote repository.
 
 5. How would you collaborate without using Git or GitHub?  What would be easier,
 and what would be harder?
-
-    Fill in your answer here
+	It would be difficult without some kind of version control. I would establish ownership of certain files to certain people. Then if A wanted to change a file owned by B, A would have to contact B and have B merge A's changes. It would really be annoying. 
 
 6. When would you want to make changes in a separate branch rather than directly in
 master?  What benefits does each approach have?
