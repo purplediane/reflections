@@ -9,8 +9,9 @@ automatically stay up-to-date with your remote repository?
 
 3. Describe the differences between forks, clones, and branches.  When would you
 use one instead of another?
-
-    Fill in your answer here
+	When you want an independent version of a repository on github, use fork. It remembers where it came from, but that is all. 
+	Cloning makes another version of a repository. Depending on where it was cloned from, you may be able to push changes to your clone to the original repo.
+	Branches are local and are for new versions of files that may or may not be merged into the master repo, either local or remote.
 
 4. What is the benefit of having a copy of the last known state of the remote
 stored locally?
