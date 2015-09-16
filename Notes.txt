@@ -1,0 +1,218 @@
+Created a repository on github. Now to update it with local repository:
+
+$ cd ../Reflections/
+diane (master) Reflections $ git remote add origin https://github.com/purplediane/reflections.git
+diane (master) Reflections $ git remote -v
+origin	https://github.com/purplediane/reflections.git (fetch)
+origin	https://github.com/purplediane/reflections.git (push)
+diane (master) Reflections $ git push -u origin master
+Counting objects: 15, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (15/15), 2.87 KiB | 0 bytes/s, done.
+Total 15 (delta 7), reused 0 (delta 0)
+To https://github.com/purplediane/reflections.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+diane (master) Reflections $ git remote -v
+origin	https://github.com/purplediane/reflections.git (fetch)
+origin	https://github.com/purplediane/reflections.git (push)
+
+Now both locations have the 2 files, L1-reflections.txt and L2-reflections.txt
+
+On github, I added a new file, L3-reflections.txt with the lesson 3 prompts copied from the download file. Now I want to bring it local.
+
+diane (master) Reflections $ git pull origin master
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/purplediane/reflections
+ * branch            master     -> FETCH_HEAD
+   af4f185..4f5b09b  master     -> origin/master
+Updating af4f185..4f5b09b
+Fast-forward
+ L3-reflections.txt | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 L3-reflections.txt
+
+
+After making local changes, I want to put the changes up to github
+
+diane (master) Reflections $ git push
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 1.12 KiB | 0 bytes/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
+To https://github.com/purplediane/reflections.git
+   4f5b09b..b7fd35e  master -> master
+
+
+======================================================
+
+I forked a recipes repository on github, then copied the "HTTPS clone URL" from my own new github repository. Then I used that to make a local repo:
+diane (master) Reflections $ cd ..
+diane UsingGit $ git clone https://github.com/purplediane/recipes.git
+Cloning into 'recipes'...
+remote: Counting objects: 13, done.
+remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13
+Unpacking objects: 100% (13/13), done.
+Checking connectivity... done.
+diane UsingGit $ cd recipes
+diane (master) recipes $ git remote -v
+origin	https://github.com/purplediane/recipes.git (fetch)
+origin	https://github.com/purplediane/recipes.git (push)
+
+Then I added a new recipe, and commmitted it locally:
+
+diane (master) recipes $ git add TortillaSoup.txt
+diane (master +) recipes $ git commit -m "New recipe for Tortilla Soup"
+[master da08301] New recipe for Tortilla Soup
+ 1 file changed, 17 insertions(+)
+ create mode 100644 TortillaSoup.txt
+
+Now I want to move it up to github:
+
+diane (master) recipes $ git push origin master
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 648 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/purplediane/recipes.git
+   a6a2f99..da08301  master -> master
+
+Now I edit the chili recipe and make a change. Meanwhile, Sarah from the Udacity course also makes a change (it was done with the shell script in the UsingGit folder). So we have conflicts, although we don't know yet. But we got notified that Sarah made a change to the github repo, so we know there is a conflict. We use git fetch to update our local version of the remote repo without affecting the local master branch we changed.
+
+"git pull origin master" is the same thing as saying
+git fetch origin
+git merge master origin/master
+
+The pull uses fetch to get a local copy of the remote origin, then it is merged with the local master.
+
+So now we want to cehck the chanes that were made in the github repo:
+
+diane (master) recipes $ git fetch origin
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 1 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/purplediane/recipes
+   da08301..1bb6290  master     -> origin/master
+
+To see the differences between the new remote origin and the local master:
+
+diane (master) recipes $ git diff origin/master master
+
+To merge the changes:
+diane (master) recipes $ git merge master origin/master
+Auto-merging chili-recipe.txt
+CONFLICT (content): Merge conflict in chili-recipe.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Edit the chili-recipe.txt file and fix the merge.
+
+diane (master *+|MERGING) recipes $ git add chili-recipe.txt
+diane (master +|MERGING) recipes $ git commit
+[master 72b02e6] Merge remote-tracking branch 'origin/master'
+diane (master) recipes $ 
+
+We could have just done "git pull origin/master" but this showed the git fetch command.
+
+============================
+
+create new branch, edit a file & commit
+
+diane (master) recipes $ git checkout new-oil 
+Switched to branch 'new-oil'
+
+edit the file
+
+diane (new-oil *) recipes $ git add cake-recipe.txt
+diane (new-oil +) recipes $ git commit -m "Use Canola oil"
+[new-oil d6106f5] Use Canola oil
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+push the branch to github
+
+diane (new-oil) recipes $ git push origin new-oil
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 306 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/purplediane/recipes.git
+ * [new branch]      new-oil -> new-oil
+
+Now on github, use the branches pull-down to "checkout" the new-oil branch, and click on "pull request".
+>>>>>>>>>NOTE<<<<<<<<<< IMPORTANT
+Be sure to select the correct base! By default it will be the forked repository!
+Then, create pull request.
+From the repo, you can see the pull requests. I made a comment due to a typo that I don't want to merge into master.
+Now, locally, I fix the typo and commit the change; still in the new-oil branch & push to github:
+
+diane (new-oil) recipes $ git status
+On branch new-oil
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   cake-recipe.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+diane (new-oil *) recipes $ git commit -a -m "Fix typo in canola"
+[new-oil c5b3f52] Fix typo in canola
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+diane (new-oil) recipes $ git push origin new-oil
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 301 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/purplediane/recipes.git
+   d6106f5..c5b3f52  new-oil -> new-oil
+
+Now we go back to github. There has been another change! Using the shell script, we simulate a change made by Sarah:
+bash sarah_changes_2.sh https://github.com/purplediane/recipes.git
+This is similar to what we did earlier. Now, we pull those changes into local master. When we try to merge we get a merge conflict.
+
+diane (new-oil) recipes $ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+diane (master) recipes $ git pull origin master
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 1 (delta 1), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/purplediane/recipes
+ * branch            master     -> FETCH_HEAD
+   72b02e6..fe55507  master     -> origin/master
+Updating 72b02e6..fe55507
+Fast-forward
+ cake-recipe.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+diane (master) recipes $ git checkout new-oil 
+Switched to branch 'new-oil'
+diane (new-oil) recipes $ git merge master new-oil 
+Auto-merging cake-recipe.txt
+CONFLICT (content): Merge conflict in cake-recipe.txt
+Automatic merge failed; fix conflicts and then commit the result.
+diane (new-oil *+|MERGING) recipes $ 
+
+Resolved the merge, commit and move up to github
+
+diane (new-oil *+|MERGING) recipes $ git commit -a 
+[new-oil 9262844] Merge branch 'master' into new-oil
+diane (new-oil) recipes $ git push origin new-oil
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 342 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/purplediane/recipes.git
+   c5b3f52..9262844  new-oil -> new-oil
+
+
+
+
